@@ -1,0 +1,20 @@
+name: Python static checks
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Validate Python code and JSON manifests
+        run: |
+          python -m compileall -q custom_components/str_reborn
+          python -c 'import json,pathlib; [json.loads(p.read_text()) for p in pathlib.Path("custom_components/str_reborn").rglob("*.json")]'
+      - name: Run parser tests
+        run: python -m unittest discover -s tests -v

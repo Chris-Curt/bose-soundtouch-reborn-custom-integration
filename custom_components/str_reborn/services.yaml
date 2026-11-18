@@ -1,0 +1,30 @@
+announce:
+  name: Announcement
+  description: Play a spoken announcement or audio file and attempt to resume the previous audio source using ST-Reborn.
+  fields:
+    entry_id:
+      name: Lautsprecher
+      description: Bose-Lautsprecher für die Ansage auswählen
+      required: true
+      selector:
+        config_entry:
+          integration: str_reborn
+    text:
+      example: Die Waschmaschine ist fertig.
+      selector:
+        text:
+    url:
+      example: http://192.168.1.5:8123/local/notification.mp3
+      selector:
+        text:
+    language:
+      example: de
+      selector:
+        text:
+    volume:
+      example: 35
+      selector:
+        number:
+          min: 0
+          max: 100
+          mode: slider
